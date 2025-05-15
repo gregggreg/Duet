@@ -49,7 +49,7 @@ extension Models.Image {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
             case let .name(value):
-                Image(value, bundle: .module)
+                Image(value)
                     .resizable()
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)

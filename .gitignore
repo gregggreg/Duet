@@ -4,3 +4,4 @@ xcuserdata
 .build
 **/.build
 .vscode
+/.swiftpm

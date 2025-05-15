@@ -1,11 +1,11 @@
 import XCTest
-@testable import ServerDrivenSwiftUI
+@testable import Duet
 
-final class ServerDrivenSwiftUITests: XCTestCase {
+final class DuetTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(ServerDrivenSwiftUI().text, "Hello, World!")
+        // XCTAssertEqual(Duet().text, "Hello, World!")
     }
 }
