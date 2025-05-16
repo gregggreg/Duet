@@ -22,6 +22,7 @@ public indirect enum Component: Identifiable, Codable {
     case fixedSize(Models.FixedSize)
     case spacer(Models.Spacer)
     case divider(Models.Divider)
+    case forEach(Models.ForEach)
     case multilineTextAlignment(Models.MultilineTextAlignment)
     case lineLimit(Models.LineLimit)
     case navigationTitle(Models.NavigationTitle)
@@ -78,6 +79,8 @@ public indirect enum Component: Identifiable, Codable {
             return model.id
         case let .divider(model):
             return model.id
+        case let .forEach(model):
+            return model.id
         case let .multilineTextAlignment(model):
             return model.id
         case let .lineLimit(model):
@@ -129,6 +132,8 @@ public indirect enum Component: Identifiable, Codable {
             Spacer()
         case .divider:
             Divider()
+        case let .forEach(model):
+            Models.ForEach.ComponentView(model, dispatch)
         case let .multilineTextAlignment(model):
             Models.MultilineTextAlignment.ComponentView(model, dispatch)
         case let .lineLimit(model):

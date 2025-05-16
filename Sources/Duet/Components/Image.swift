@@ -1,5 +1,10 @@
 import Foundation
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 public extension Models {
     struct Image: Identifiable, Model, Codable {
@@ -19,6 +24,14 @@ public extension Models {
             value = .systemName(systemName)
         }
 
+        public init(
+            id: UUID = UUID(),
+            data: Data
+        ) {
+            self.id = id
+            value = .data(data)
+        }
+
         public let id: UUID
         var value: Property
 
@@ -32,6 +45,7 @@ extension Models.Image {
     enum Property: Codable {
         case name(String)
         case systemName(String)
+        case data(Data)
     }
 
     struct ComponentView: View {
@@ -49,10 +63,19 @@ extension Models.Image {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
             case let .name(value):
-                Image(value)
+                    Image(value, bundle: .main)
                     .resizable()
-                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
+            case let .data(value):
+                #if canImport(UIKit)
+                Image(uiImage: UIImage(data: value) ?? UIImage())
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                #elseif canImport(AppKit)
+                Image(nsImage: NSImage(data: value) ?? NSImage())
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                #endif
             }
         }
     }
